@@ -89,7 +89,7 @@ rankhospital <- function(state, outcome, num = "best") {
   #####  Rank <- 1:nrow(df_t)
   #####  df_t_ordered <- df_t[order(df_t[3], df_t[1]), ]
   #####  df_t_ordered$Rank <- as.data.frame(Rank) ##### Add a Rank Column to df_t
-  ##### df_t_ordered$State <- NULL ##### Remove Column State from df_t
+  #####  df_t_ordered$State <- NULL ##### Remove Column State from df_t
   
   # write.csv(df_t, "df_t")  
   if ( num == "best" ) num <- 1
