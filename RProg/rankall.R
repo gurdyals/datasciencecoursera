@@ -78,7 +78,6 @@
 
 # Use the submit script provided to submit your solution to this part. There are 3 
 # tests that need to be passed for this part of the assignment.
-
 # rm(list = ls())
 #######################################################################
 rankall <- function(outcome, num = "best") {
@@ -86,11 +85,6 @@ rankall <- function(outcome, num = "best") {
   File = "outcome-of-care-measures.csv"
   # Hospital = 2
   # State = 7 ; outcome = "heart attack"; num = 20
-  
-# 8; outcome = "heart attack"; num = 4;
-# 9; outcome = "pneumonia"; num = "worst";
-# 10; outcome = "heart failure"; num = 10;
-  
   ##### data_f <- read.csv("outcome-of-care-measures.csv", check.names = T, stringsAsFactors = F, na.strings = "Not Available", colClasses = "character")
   data_f <- read.csv(File, check.names = TRUE, stringsAsFactors = FALSE, na.strings = "Not Available")
   outcomes <- c("heart attack" = 11, "heart failure" = 17, "pneumonia" = 23)
@@ -101,6 +95,11 @@ rankall <- function(outcome, num = "best") {
   df_t[, 3 ] = as.numeric( df_t[, 3 ] )  ##### USE THIS
   names(df_t) <- names     ##### USE THIS
   
+# DELETE FROM HERE 
+  nrow(df_t)
+  write.csv(df_t, paste0("df_t_", outcome))
+# DELETE Upto HERE 
+  
   ## Check that state and outcome are valid
   ##### if ( !(state %in% data_f$State) )    stop ("invalid state")
   if ( is.na(outcomes[outcome]) )    stop ("invalid outcomes")
@@ -109,67 +108,72 @@ rankall <- function(outcome, num = "best") {
   if ( num %in% nums[1] ) num <- 1
   if ( num %in% nums[2] ) num <- -1
   
-  ##### abs(num);  sign(num)
-  
   ##### df_t <- df_t[ order(df_t[2], sign(num) * df_t[3], df_t[1]), ]
-  
   f <- df_t$State
   df_t <- split(df_t, f)   ##### USE THIS
 
   ## Return a data frame with the hospital names and the
   ## (abbreviated) state name
-  ##### if ( num %in% nums ) num <- 1
-  
   hospital <- names(df_t)
-  df <- as.data.frame(hospital, row.names = hospital); head(df); tail(df);
-  df$state <- hospital; head(df); tail(df);
-  
-  # t <- names(df_t)
+  df <- data.frame(hospital = hospital, state = hospital, row.names = hospital); head(df); tail(df);
   
   i1 <- FALSE; i2 <- 0
   for ( i in names(df_t) ) {
-    # cat ( "State : ", i, ":\t")
-    # cat ( "Nrow df_t : ", i, " :", nrow(df_t), ":\t" )
-    # cat ( "Nrow df_t[", i,"] :", nrow(df_t[i]), ":\t" )
-    # cat ( "Nrow df_t[[", i, "]] :", nrow(df_t[[i]]), ":\n" )
+    ##### cat("State:", i,":Nrow(df_t):", nrow(df_t),":Nrow df_t[", i,"]:", nrow(df_t[i]),":Nrow df_t[[", i, "]]:", nrow(df_t[[i]]),":\n")
+    ##### paste("State:", i,":Nrow(df_t):", nrow(df_t),":Nrow df_t[", i,"]:", nrow(df_t[i]),":Nrow df_t[[", i, "]]:", nrow(df_t[[i]]),":\n")
+    ##### paste0("State:", i,":Nrow(df_t):", nrow(df_t),":Nrow df_t[", i,"]:", nrow(df_t[i]),":Nrow df_t[[", i, "]]:", nrow(df_t[[i]]),":\n")
+    ##### print (paste0("State:", i,":Nrow(df_t):", nrow(df_t),":Nrow df_t[", i,"]:", nrow(df_t[i]),":Nrow df_t[[", i, "]]:", nrow(df_t[[i]]),":\n"))
     
-    ##### df[[i]] <- df_t[[i]][abs(num), ][ c(1, 2) ]
-    
+    i2 <- i2 + 1
     df1 <- df_t[[i]]
+# 1 of below Start is required     
+    # df1 <- df1[ order(df1[2], sign(num) * df1[3], sign(num) * df1[1]), ]; # This syntax is not correct as sign(num) *df1[1] has a problem
+    if ( num > 0 ) {
+      #df1 <- df1[ order(df1[2], sign(num) * df1[3], df1[1]), ]; df1
+      #hospital[i2] =  as.character( df1[abs(num), ][1] ); hospital
+      hospital[i2] =  as.character( df1[ order(df1[2], df1[3], df1[1]), ][abs(num), ][1] ); hospital
+    }
+    else {
+      #df1 <- df1[ order(df1[2], sign(num) * df1[3], df1[1]), ]; df1
+      #hospital[i2] =  as.character( df1[abs(num), ][1] ); hospital
+      hospital[i2] =  as.character( df1[ order(df1[2], -df1[3], -rank(df1[1])), ][abs(num), ][1] ); hospital
+    }
+# 1 of above End is required
     
-    ##### df_t <- df_t[ order(df_t[2], sign(num) * df_t[3], df_t[1]), ]
-    ##### df1 <- df1[ order(df1[2], sign(num) * df1[3], df1[1]), ]
-    
-    df1 <- df1[ order(sign(num) * df1[3], df1[1]), ]
-    
-    i2 = i2 + 1
-    hospital[i2] =  as.character( df_t[[i]][abs(num), ][1] )
-    ##### hospital[i2] =  as.character( df1[ order(sign(num) * df1[3], df1[1]), ][abs(num), ][1] )
-    
-    ##### write.table(df_t[[i]][abs(num), ][ c(1, 2) ], file = "df_t", sep = ",", append = i1, col.names = !i1)
-    write.table(df1[ order(sign(num) * df1[3], df1[1]), ][abs(num), ][ c(1, 2) ], file = "df_t", sep = ",", append = i1, col.names = !i1)
+    write.table(df1, file = paste0("df1_sorted_", num, "_", outcome), sep = ",", append = i1, col.names = !i1)
     i1 <- TRUE
-    
-    # i2 <- i2 + nrow(df_t[[i]])
-    # cat (i1, ":\t:", i2)
   }
   
   ##### df$hospital <- as.data.frame(hospital); head(df); tail(df); nrow(df); ncol(df); length(df); class(df)
   df$hospital <- hospital; head(df); tail(df); nrow(df); ncol(df); length(df); class(df)
   head(df); tail(df); nrow(df); ncol(df); length(df); class(df)
-  dim(df)
-
-  names(df)
+  dim(df); names(df);
   
   # unsplit
   # f <- factor(names(df))
   # df <- unsplit ( df, f )
-  write.csv(df, file = "df.csv", sep = ",", append = F, col.names = T)
-  write.table(df, file = "df", sep = ",", append = F, col.names = T)
-  ##### read.csv("df.csv")
+  write.csv(df, file = "df.csv", row.names = F)
+  write.table(df, file = paste0("df_", num, "_", outcome), sep = ",", append = F, col.names = T, row.names = F)
   
   df
 }
+
+# .st_ST# <- Sys.time()
+##### rm (list = ls())
+##### source("submitscript3.R")
+##### source("rankall.R")
+##### submit()
+##### 1;2;3;4;5;6;7;8;9;10
+
+# rankall("heart attack", 4)
+# rankall("heart attack", 6)
+# rankall("heart attack", 7)
+# rankall("pneumonia", "worst")
+# rankall("heart failure", 10)
+
+# 8; outcome = "heart attack"; num = 4;
+# 9; outcome = "pneumonia"; num = "worst";
+# 10; outcome = "heart failure"; num = 10;
 
 #######################################################################
 # df
@@ -177,6 +181,10 @@ rankall <- function(outcome, num = "best") {
 # ?unsplit
 # df <- unsplit(df, uf)
 # write.csv(df, "i")
+# write.csv(df, file = "df.csv", row.names = F)
+# i <- read.csv("df.csv")
+# head(i); tail(i); nrow(i); ncol(i); length(i); class(i); dim(i); names(i);
+
 #######################################################################
 # rm(list = ls() )
 # state = "AA"; WV WY WA UT
@@ -222,17 +230,8 @@ rankall <- function(outcome, num = "best") {
 #   cat (i1, ":\t:", i2)
 # }
 
-
-
-
 #######################################################################
 
-# .st_ST# <- Sys.time()
-##### rm (list = ls())
-##### source("submitscript3.R")
-##### source("rankall.R")
-##### submit()
-##### 1;2;3;4;5;6;7;8;9;10
 #######################################################################
 # Hospital = 2; State = 7; num = "best"
 # state = "TX"; outcome = "heart failure"
