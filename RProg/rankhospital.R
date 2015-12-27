@@ -121,16 +121,16 @@ rankhospital <- function(state, outcome, num = "best") {
 # > rankhospital("MN", "heart attack", 5000)
 # [1] NA
 
+# Hospital = 2; State = 7; num = "best"
+# state = "TX"; outcome = "heart failure"
 
 ##### state = "TX"; outcome = "heart failure"; num = 4
-##### df_t <- data_f[c(2,7,17)][ !is.na (data_f[outcomes[outcome]] ),] # ) # [ !is.na(outcomes[outcome]), ]) ##### USE THIS
+##### df_t <- data_f[c(2, 7, outcomes[outcome])][!is.na(data_f[outcomes[outcome]]), ] ##### USE THIS
+##### df_t <- data_f[c(Hospital, State, outcomes[outcome])][!is.na(data_f[outcomes[outcome]]) & data_f$State == state, ]
+##### df_t <- data_f[c(Hospital, State, outcomes[outcome])][!is.na(data_f[outcomes[outcome]]), ] ##### USE THIS
 ##### head (df_t)
-##### nrow(data_f[c(Hospital, State, outcomes[outcome])][ !is.na(outcomes[outcome]), ])
-##### head ( data_f[ c(Hospital, State, outcomes[outcome] ) ][data_f$State == state, ] )
-##### data_f[c(Hospital, State, outcomes[outcome])][!is.na(outcomes[outcome]) & data_f$State == state, ]
-##### df_t1 <- data_f[c(Hospital, State, outcomes[outcome])][!is.na(outcomes[outcome]) & data_f$State == state, ]
-##### df_t <- data_f[c(Hospital, State, outcomes[outcome])][!is.na(outcomes[outcome]) & data_f$State == state, ]
-##### df_t <- data_f[c(Hospital, State, outcomes[outcome])][!is.na(df_t[3]), ]##### USE THIS
+##### nrow(df_t)
+##### head (data_f[c(Hospital, State, outcomes[outcome])][data_f$State == state, ])
 
 
 ##### head(df_t)
@@ -240,6 +240,31 @@ rankhospital <- function(state, outcome, num = "best") {
 ##### names(df_ts)
 ##### for ( i in names(df_ts) ) { print( df_ts[[i]][,1][1]) }
 
+##### for ( i in names(df_ts) ) {
+##### cat ("For State ", i, " Hospital Name ", df_ts[[i]][1][1,], "\n" )
+#####   # DOES NOT  Work # cat ("For State ", i, " Hospital Record ", df_ts[[i]][1,][1,], "\n" )
+#####   cat ("For State ", i, " Hospital Record ", as.character(df_ts[[i]][1,]), "\n" )
+#####   cat ("For State ", i, " Hospital Record ", paste(df_ts[[i]][1,]), "\n" )
+#####   cat ("For State ", i, " Hospital Record ", paste(df_ts[[i]][1,], sep = "\t"), "\n" )
+##### }
+
+##### print ( c(df_ts[[i]][1,]) )
+##### print ( as.character(df_ts[[i]][1,]) )
+
+##### df_ts[[i]][1,][1, ]
+##### as.character (df_ts[[i]][1,])
+##### as.list (df_ts[[i]][1,][1,])
+##### paste0(df_ts[[i]][1,], sep = ",")
+##### df_ts[[i]][1,][3][4]
+
+##### ?sprintf
+##### print.factor(i)
+
+##### df_ts[[i]][1][1,]
+##### ?cat
+##### cat (df_ts[[i]][1][1,])
+##### cat ("df_ts[[1]][1][1]")
+
 ##### df_t1 <- df_t[df_t[2] == state,]   ##### USE THIS
 ##### df_t1 ##### USE THIS
 ##### class(df_t1)    ##### USE THIS
@@ -268,6 +293,17 @@ rankhospital <- function(state, outcome, num = "best") {
 ##### i
 ##### class(i)
 ##### rank (i, ties.method = "average")
+
+##### # this function also returns output in the desired format
+##### P <- 243.51
+##### t <- 31 / 365
+##### n <- 365
+##### data.fn <- function(r = 0.15) {
+#####   interest <- P*(1+( r/n ))^( n*t ) - P
+#####   list(r = r, interest = interest)
+##### }
+##### my.output <- as.data.frame(data.fn(seq(0.15, 0.22, by = 0.01)))
+##### my.output
 
 ##### write.csv(df_t1[state], "df_t1")
 
