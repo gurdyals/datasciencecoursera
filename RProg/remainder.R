@@ -35,3 +35,6 @@ remainder <- function(num = 7, divisor == 1) {
   # Remember: the last expression evaluated will be returned! 
   num / divisor
 }
+
+# .st_TM <- Sys.time()
+#######################################################################

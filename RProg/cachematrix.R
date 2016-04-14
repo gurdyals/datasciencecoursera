@@ -67,37 +67,6 @@ cacheSolve <- function(x, ...) {
   mtx <- x$setInverse(inversed_mtx) # set variable "mtx" for use by other functions
   mtx
 }
+
+# .st_TM <- Sys.time()
 #######################################################################
-
-# Code after this line is for testing purpose and should not be considered
-# part of the assignment
-# Thanks
-##### rm(list = ls())
-## Change the value of "n" to test creation/inversion of Matrix
-n <- 5
-mtx2inv <- hilbert(n)
-m1 <- mtx2inv
-m1
-func_invert <- function (mtx1, ...) solve(mtx1, ...)
-inversed_mtx <- func_invert(m1)
-inversed_mtx
-
-mtx2inv
-varM <- makeCacheMatrix(mtx2inv)
-varM$mtx
-cacheSolve(varM)
-
-m2 <- varM$get()
-m2
-varM$set(m2)
-varM$mtx2inv
-varM$mtx
-varM$getInverse()
-cacheSolve(varM)
-varM$getInverse()
-mtx2inv <- varM$set(mtx2inv)
-mtx2inv
-inversed_mtx <- func_invert(m2)
-inversed_mtx
-varM$setInverse(inversed_mtx)
-inversed_mtx

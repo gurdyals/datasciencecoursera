@@ -41,3 +41,6 @@ mad_libs <- function(...){
   # be functional!
   paste("News from", place, "today where", adjective, "students took to the streets in protest of the new", noun, "being installed on campus.")
 }
+
+# .st_TM <- Sys.time()
+#######################################################################

@@ -69,3 +69,6 @@ complete <- function(directory, id = 1:332) {
   print ( Sys.time() )
   df_out
 }
+
+# .st_TM <- Sys.time()
+#######################################################################

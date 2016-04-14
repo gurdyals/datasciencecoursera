@@ -1,6 +1,6 @@
 corr <- function(directory, threshold = 0) {
   ##### rm (list = ls())
-  st_TM <- Sys.time()
+  # .st_TM <- Sys.time()
   ##### directory = "specdata"
   ##### threshold = 150
   
@@ -130,6 +130,9 @@ corr <- function(directory, threshold = 0) {
   
   cr_fin
 }
+
+# .st_TM <- Sys.time()
+#######################################################################
 
 ##### for ( i in 1:332 ) {
 #####   if (!is.na(cr[[i]])) {

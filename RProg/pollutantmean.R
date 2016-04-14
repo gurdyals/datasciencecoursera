@@ -107,3 +107,6 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   print ( nd_TM )
   return ( mean_df )
 }
+
+# .st_TM <- Sys.time()
+#######################################################################

@@ -85,39 +85,6 @@ best <- function(state, outcome) {
   # df2$Hospital.Name[nrow(df2)]
   df2$Hospital.Name[1]
 }
+
+# .st_ST# <- Sys.time()
 #######################################################################
-
-# class (df1$State )
-# class (df1$Hospital.Name )
-# class (df1$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia )
-
-# sort (df1$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia)
-# max (df1$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia)
-
-# sort (df1$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack)
-# max(df1$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack)
-
-# tail(df1)
-# tail(df2)
-# head(df1)
-# head(df2)
-# nrow(df1)
-# nrow(df2)
-# best("SC", "heart attack")
-# best("NY", "pneumonia")
-# best("NN", "pneumonia")
-# source("best.R")
-# submit() 
-# source("submitscript3.R")
-# > best("TX", "heart attack")
-# [1] "CYPRESS FAIRBANKS MEDICAL CENTER"
-# > best("TX", "heart failure")
-# [1] "FORT DUNCAN MEDICAL CENTER"
-# > best("MD", "heart attack")
-# [1] "JOHNS HOPKINS HOSPITAL, THE"
-# > best("MD", "pneumonia")
-# [1] "GREATER BALTIMORE MEDICAL CENTER"
-# > best("BB", "heart attack")
-# Error in best("BB", "heart attack") : invalid state
-# > best("NY", "hert attack")
-# Error in best("NY", "hert attack") : invalid outcome

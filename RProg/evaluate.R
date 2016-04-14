@@ -34,3 +34,6 @@ evaluate <- function(func, dat){
   # Remember: the last expression evaluated will be returned! 
   func( dat )
 }
+
+# .st_TM <- Sys.time()
+#######################################################################

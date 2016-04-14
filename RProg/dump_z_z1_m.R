@@ -9,3 +9,6 @@ structure(201:221, .Dim = c(3L, 7L), .Names = c("c(\"a\", \"d\", \"v\", \"s\", \
 "c(\"r\", \"g\", \"u\")", NA, NA, NA, NA, NA, NA, NA, NA, NA, 
 NA, NA, NA, NA, NA, NA, NA, NA, NA, NA), .Dimnames = list(c("a", 
 "d", "v"), c("s", "w", "d", "s", "r", "g", "u")))
+
+# .st_TM <- Sys.time()
+#######################################################################

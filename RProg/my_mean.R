@@ -26,3 +26,6 @@ my_mean <- function(my_vector) {
   print (lngth)
   print (my_sum / lngth)
 }
+
+# .st_TM <- Sys.time()
+#######################################################################
